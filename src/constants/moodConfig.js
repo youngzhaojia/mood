@@ -17,6 +17,12 @@ const moodTypeExpression = {
   [MOOD_TYPE_UNKNOWN]: "question",
 };
 
+// 种类对应的类名
+const moodTypeClassName = {
+  [MOOD_TYPE_COMMON]: "common",
+  [MOOD_TYPE_GREAT]: "great",
+};
+
 // 未知种类高度
 const UNKNOWN_CHART_HEIGHT = "87px";
 
@@ -66,5 +72,6 @@ export {
   UNKNOWN_CHART_HEIGHT,
   moodTypeColorMap,
   moodTypeExpression,
+  moodTypeClassName,
   moodWeekData,
 };

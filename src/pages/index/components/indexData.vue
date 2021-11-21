@@ -8,18 +8,22 @@
       <indexDataChartItem v-for="(dataItem,index) in moodWeekData"
                           :key="index"
                           :dayNum="index"
-                          :moodData="dataItem">
+                          :moodData="dataItem"
+                          :activeIndex="activeIndex"
+                          @click.native="handleClickItem(index)">
       </indexDataChartItem>
     </view>
     <!-- 柱状chart end -->
 
     <!-- 日期文案 start -->
     <view class="index-data-label">
-      <view class="index-data-label-item"
-            v-for="(dataItem,index) in moodWeekData"
-            :key="index">
-        {{ dataItem.dayLabel }}
-      </view>
+      <indexDataLabelItem class="index-data-label-item"
+                          v-for="(dataItem,index) in moodWeekData"
+                          :key="index"
+                          :activeIndex="activeIndex"
+                          :activeRemoveIndex="activeRemoveIndex"
+                          :dayNum="index"
+                          :moodData="dataItem"></indexDataLabelItem>
     </view>
     <!-- 日期文案 end -->
   </view>
@@ -29,17 +33,40 @@
 import * as moodConfig from "@/constants/moodConfig";
 
 import indexDataChartItem from "@/pages/index/components/indexDataChartItem";
+import indexDataLabelItem from "@/pages/index/components/indexDataLabelItem";
 
 // 图展示
 export default {
   name: "indexData",
   components: {
     indexDataChartItem,
+    indexDataLabelItem,
   },
   data() {
     return {
       moodWeekData: moodConfig.moodWeekData,
+      activeIndex: -1,
+      activeRemoveIndex: -1,
     };
+  },
+  methods: {
+    handleClickItem(index) {
+      // 不是common、great 不激活
+      if (
+        !moodConfig.moodTypeClassName.hasOwnProperty(
+          this.moodWeekData[index].type
+        )
+      ) {
+        return;
+      }
+
+      if (this.activeIndex > -1) {
+        // 旧的激活记录
+        this.activeRemoveIndex = this.activeIndex;
+      }
+      // 新激活
+      this.activeIndex = index;
+    },
   },
 };
 </script>
@@ -69,19 +96,6 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    .index-data-label-item {
-      width: 44px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      font-family: PingFang HK;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 18px;
-      color: #2d2f33;
-    }
   }
 }
 </style>
