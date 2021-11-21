@@ -1,5 +1,8 @@
 <template>
-  <view class="index-data-label-item">
+  <view class="index-data-label-item"
+        :style="{
+      '--index': dayNum,
+    }">
     <view class="label-item-box"
           :class="animationClass">
       {{ moodData.dayLabel }}
@@ -71,6 +74,10 @@ export default {
   font-size: 18px;
   color: #2d2f33;
 
+  visibility: hidden;
+  --time: calc(var(--index) * 250ms);
+  animation: animateHeight 0.4s ease-out var(--time) forwards;
+
   .label-item-box {
     box-sizing: border-box;
     width: 36px;
@@ -112,6 +119,16 @@ export default {
       animation: greatRemoveActive 1s;
       color: #2d2f33;
     }
+  }
+}
+
+// 初始化展示
+@keyframes animateHeight {
+  0% {
+    height: 0;
+  }
+  100% {
+    visibility: visible;
   }
 }
 

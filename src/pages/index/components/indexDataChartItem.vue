@@ -4,6 +4,7 @@
           :class="animationClass"
           :style="{
       height: `${itemHeight}`,
+      '--index': dayNum,
     }">
 
       <!-- 数值 -->
@@ -72,6 +73,7 @@ export default {
       // 激活
       if (this.activeIndex === this.dayNum) {
         return {
+          "after-init-common": this.isShow,
           [`active-public-${this.moodData.type}`]: true,
           [`active-${this.moodData.type}`]: true,
           [`active-animation-${this.moodData.type}`]: true,
@@ -81,18 +83,27 @@ export default {
       // 失去激活
       if (this.activeRemoveIndex === this.dayNum) {
         return {
+          "after-init-common": this.isShow,
           [`active-remove-animation-${this.moodData.type}`]: true,
         };
       }
 
       // 默认状态
       return {
+        "after-init-common": this.isShow,
         [`background-${this.moodData.type}`]: true,
       };
     },
   },
   data() {
-    return {};
+    return {
+      isShow: false,
+    };
+  },
+  mounted() {
+    setTimeout(() => {
+      this.isShow = true;
+    }, (this.dayNum + 1) * 250);
   },
   methods: {
     // 获取表情组件
@@ -133,6 +144,11 @@ export default {
     box-sizing: content-box;
     border-radius: 30px;
 
+    // 初始化依次展示
+    visibility: hidden;
+    --time: calc(var(--index) * 250ms);
+    animation: animateHeight 0.4s ease-out var(--time) 1 forwards;
+
     // 默认状态
     &.background-common {
       background: #52c873;
@@ -142,6 +158,12 @@ export default {
     }
     &.background-unknown {
       background: #cfcfcf;
+    }
+
+    // 初始化后，覆盖依次展示动画
+    &.after-init-common {
+      animation: unset;
+      visibility: visible;
     }
 
     // 激活状态的共态
@@ -188,6 +210,7 @@ export default {
       background: #ff823c;
     }
 
+    // 数值
     .chart-item-num {
       position: absolute;
       top: 12px;
@@ -211,6 +234,16 @@ export default {
       bottom: 4px;
       padding: 0 4px;
     }
+  }
+}
+
+// 初始化长高
+@keyframes animateHeight {
+  0% {
+    height: 0;
+  }
+  100% {
+    visibility: visible;
   }
 }
 
