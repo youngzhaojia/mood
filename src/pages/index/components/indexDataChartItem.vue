@@ -103,7 +103,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.isShow = true;
-    }, (this.dayNum + 1) * 250);
+    }, (this.dayNum + 1) * 350);
   },
   methods: {
     // 获取表情组件

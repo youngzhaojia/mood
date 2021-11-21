@@ -1,11 +1,6 @@
 <template>
   <view class="expression-laugh">
-    <view class="eye-left"></view>
-
-    <view class="eye-right"></view>
-
-    <view class="expression-mouth">
-    </view>
+    <image src="@/static/laugh.png"></image>
   </view>
 </template>
 
@@ -29,17 +24,10 @@ export default {
   background: #ffdec9;
   border-radius: 50%;
 
-  .eye-left {
-    position: absolute;
-  }
-
-  .eye-right {
-    position: absolute;
-  }
-
-  // 嘴
-  .expression-mouth {
-    position: absolute;
+  image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 </style>
