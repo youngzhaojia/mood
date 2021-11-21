@@ -36,14 +36,17 @@ export default {
   },
   computed: {
     animationClass() {
+      // 今天
+      if (this.moodData.today) {
+        return {
+          today: true,
+        };
+      }
       // 激活
       if (this.activeIndex === this.dayNum) {
-        let activeAnimationName = `active-animation-${
-          moodConfig.moodTypeClassName[this.moodData.type]
-        }`;
         return {
           "label-item-box-active": true,
-          [activeAnimationName]: true,
+          [`active-animation-${this.moodData.type}`]: true,
         };
       }
     },
@@ -75,10 +78,17 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 8px;
+
+    // 今天的，加黑
+    &.today {
+      background: #2d2f33;
+      color: #fff;
+    }
+
     // 激活状态
     &.label-item-box-active {
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-      border-radius: 8px;
     }
 
     // 激活动画
@@ -110,9 +120,6 @@ export default {
   0% {
     color: #2d2f33;
   }
-  50% {
-    color: #42f373;
-  }
   100% {
     color: #52c873;
   }
@@ -122,9 +129,6 @@ export default {
 @keyframes greatActive {
   0% {
     color: #2d2f33;
-  }
-  50% {
-    color: #ffa14a;
   }
   100% {
     color: #f36a1b;

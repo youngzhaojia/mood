@@ -17,12 +17,6 @@ const moodTypeExpression = {
   [MOOD_TYPE_UNKNOWN]: "question",
 };
 
-// 种类对应的类名
-const moodTypeClassName = {
-  [MOOD_TYPE_COMMON]: "common",
-  [MOOD_TYPE_GREAT]: "great",
-};
-
 // 未知种类高度
 const UNKNOWN_CHART_HEIGHT = "87px";
 
@@ -32,36 +26,43 @@ const moodWeekData = [
     type: MOOD_TYPE_COMMON,
     dayLabel: "六",
     value: 86,
+    today: false,
   },
   {
     type: MOOD_TYPE_COMMON,
     dayLabel: "日",
     value: 80,
+    today: false,
   },
   {
     type: MOOD_TYPE_UNKNOWN,
     dayLabel: "一",
     value: "",
+    today: false,
   },
   {
     type: MOOD_TYPE_GREAT,
     dayLabel: "二",
     value: 90,
+    today: false,
   },
   {
     type: MOOD_TYPE_GREAT,
     dayLabel: "三",
     value: 92,
+    today: false,
   },
   {
     type: MOOD_TYPE_GREAT,
     dayLabel: "四",
     value: 97,
+    today: false,
   },
   {
     type: "common",
     dayLabel: "五",
     value: 81,
+    today: true,
   },
 ];
 
@@ -72,6 +73,5 @@ export {
   UNKNOWN_CHART_HEIGHT,
   moodTypeColorMap,
   moodTypeExpression,
-  moodTypeClassName,
   moodWeekData,
 };

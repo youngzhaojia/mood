@@ -1,17 +1,20 @@
 <template>
-  <view class="index-data-chart-item"
-        :style="{
-    height: `${itemHeight}`,
-    background: `${itemColor}`,
-  }">
-    <!-- 数值 -->
-    <view class="chart-item-num">
-      {{ moodData.value}}
-    </view>
+  <view class="index-data-chart-item-box">
+    <view class="index-data-chart-item"
+          :class="animationClass"
+          :style="{
+      height: `${itemHeight}`,
+    }">
 
-    <!-- 表情组件 -->
-    <view class="chart-item-expression">
-      <component :is="getExpression()"></component>
+      <!-- 数值 -->
+      <view class="chart-item-num">
+        {{ moodData.value}}
+      </view>
+
+      <!-- 表情组件 -->
+      <view class="chart-item-expression">
+        <component :is="getExpression()"></component>
+      </view>
     </view>
   </view>
 </template>
@@ -32,6 +35,14 @@ export default {
     expressionQuestion,
   },
   props: {
+    activeIndex: {
+      type: Number,
+      default: -1,
+    },
+    activeRemoveIndex: {
+      type: Number,
+      default: -1,
+    },
     dayNum: {
       type: Number,
       default: 0,
@@ -56,6 +67,28 @@ export default {
       }
       // 有数值，百分比
       return `${this.moodData.value}%`;
+    },
+    animationClass() {
+      // 激活
+      if (this.activeIndex === this.dayNum) {
+        return {
+          [`active-public-${this.moodData.type}`]: true,
+          [`active-${this.moodData.type}`]: true,
+          [`active-animation-${this.moodData.type}`]: true,
+        };
+      }
+
+      // 失去激活
+      if (this.activeRemoveIndex === this.dayNum) {
+        return {
+          [`active-remove-animation-${this.moodData.type}`]: true,
+        };
+      }
+
+      // 默认状态
+      return {
+        [`background-${this.moodData.type}`]: true,
+      };
     },
   },
   data() {
@@ -84,34 +117,139 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.index-data-chart-item {
-  width: 44px;
-  box-sizing: border-box;
-  border-radius: 30px;
+.index-data-chart-item-box {
   position: relative;
+  width: 50px;
+  height: 280px;
+  box-sizing: border-box;
 
-  .chart-item-num {
-    position: absolute;
-    top: 12px;
-    width: 100%;
-    height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .index-data-chart-item {
+    position: relative;
+    width: 44px;
+    box-sizing: content-box;
+    border-radius: 30px;
 
-    font-family: Nunito;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 20px;
-    color: #ffffff;
+    // 默认状态
+    &.background-common {
+      background: #52c873;
+    }
+    &.background-great {
+      background: #ff823c;
+    }
+    &.background-unknown {
+      background: #cfcfcf;
+    }
+
+    // 激活状态的共态
+    &.active-public-common {
+      border: 3px solid #dcffd6;
+      margin-bottom: -3px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    &.active-public-great {
+      border: 3px solid #ffe9d4;
+      margin-bottom: -3px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    // 激活状态
+    &.active-common {
+      background: linear-gradient(180deg, #42f373 42.71%, #a1fd44 100%);
+    }
+
+    &.active-great {
+      background: linear-gradient(180deg, #ffa14a 35.42%, #ffcc4a 100%);
+    }
+
+    // 激活动画
+    &.active-animation-common {
+      animation: commonActive 1s;
+      background: linear-gradient(180deg, #42f373 42.71%, #a1fd44 100%);
+    }
+
+    &.active-animation-great {
+      animation: greatActive 1s;
+      background: linear-gradient(180deg, #ffa14a 35.42%, #ffcc4a 100%);
+    }
+
+    // 失去激活
+    &.active-remove-animation-common {
+      animation: commonRemoveActive 1s;
+      background: #52c873;
+    }
+
+    &.active-remove-animation-great {
+      animation: greatRemoveActive 1s;
+      background: #ff823c;
+    }
+
+    .chart-item-num {
+      position: absolute;
+      top: 12px;
+      width: 100%;
+      height: 25px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      font-family: Nunito;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 20px;
+      color: #ffffff;
+    }
+
+    // 表情
+    .chart-item-expression {
+      position: absolute;
+      bottom: 4px;
+      padding: 0 4px;
+    }
   }
+}
 
-  // 表情
-  .chart-item-expression {
-    position: absolute;
-    bottom: 4px;
-    padding: 0 4px;
+// 激活
+@keyframes commonActive {
+  0% {
+    background: #52c873;
+  }
+  100% {
+    background: linear-gradient(180deg, #42f373 42.71%, #a1fd44 100%);
+  }
+}
+
+// 激活
+@keyframes greatActive {
+  0% {
+    background: #ff823c;
+  }
+  100% {
+    background: linear-gradient(180deg, #ffa14a 35.42%, #ffcc4a 100%);
+  }
+}
+
+// 去除激活
+@keyframes commonRemoveActive {
+  0% {
+    background: linear-gradient(180deg, #42f373 42.71%, #a1fd44 100%);
+  }
+  100% {
+    background: #52c873;
+  }
+}
+
+@keyframes greatRemoveActive {
+  0% {
+    background: linear-gradient(180deg, #ffa14a 35.42%, #ffcc4a 100%);
+  }
+  100% {
+    background: #ff823c;
   }
 }
 </style>

@@ -10,6 +10,7 @@
                           :dayNum="index"
                           :moodData="dataItem"
                           :activeIndex="activeIndex"
+                          :activeRemoveIndex="activeRemoveIndex"
                           @click.native="handleClickItem(index)">
       </indexDataChartItem>
     </view>
@@ -52,11 +53,7 @@ export default {
   methods: {
     handleClickItem(index) {
       // 不是common、great 不激活
-      if (
-        !moodConfig.moodTypeClassName.hasOwnProperty(
-          this.moodWeekData[index].type
-        )
-      ) {
+      if (this.moodWeekData[index].type === moodConfig.MOOD_TYPE_UNKNOWN) {
         return;
       }
 
@@ -87,8 +84,7 @@ export default {
   .index-data-chat {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
-    height: 280px;
+    align-items: center;
   }
 
   .index-data-label {
