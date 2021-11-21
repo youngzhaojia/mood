@@ -1,19 +1,28 @@
 <template>
-  <view class="content">
-    <image class="logo"
-           src="/static/logo.png"></image>
-    <view>
-      <text class="title">{{title}}</text>
-    </view>
+  <view class="mood-index-container">
+    <!-- 概览 -->
+    <indexSummary></indexSummary>
+
+    <!-- 分割线 -->
+    <view class="line-hr"></view>
+
+    <!-- 图展示 -->
+    <indexData></indexData>
   </view>
 </template>
 
 <script>
+import indexSummary from "@/pages/index/components/indexSummary";
+import indexData from "@/pages/index/components/indexData";
+
 export default {
+  name: "index",
+  components: {
+    indexSummary,
+    indexData,
+  },
   data() {
-    return {
-      title: "Hello",
-    };
+    return {};
   },
   onLoad() {},
   methods: {},
@@ -21,26 +30,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+.mood-index-container {
+  box-sizing: border-box;
+  padding: 18px 12px;
 
-.logo {
-  height: 100px;
-  width: 100px;
-  margin-top: 300px;
-}
-
-.text-area {
-  display: flex;
-  justify-content: center;
-}
-
-.title {
-  font-size: 36px;
-  color: #8f8f94;
+  // 分割线
+  .line-hr {
+    height: 2px;
+    background: #f2f2f2;
+    border-radius: 16px;
+  }
 }
 </style>
