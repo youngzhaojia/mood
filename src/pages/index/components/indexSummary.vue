@@ -31,9 +31,7 @@ export default {
   height: 238px;
   padding-top: 45px;
   background: #ffffff;
-  // not bottom， 左右线性，没实现
-  box-shadow: -6px -6px 16px -4px rgba(0, 0, 0, 0.15),
-    6px -6px 16px -4px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px -5px 16px -4px rgba(0, 0, 0, 0.15);
   border-radius: 24px 24px 0 0;
 
   .user-info {
