@@ -10,16 +10,23 @@
     </view>
 
     <!-- 表情 -->
-    <view class="chart-item-expression"></view>
+    <view class="chart-item-expression">
+      <expressionFace></expressionFace>
+    </view>
   </view>
 </template>
 
 <script>
 import * as moodConfig from "@/constants/moodConfig";
 
+import expressionFace from "@/components/expressionFace";
+
 // 图心情指数柱状
 export default {
   name: "indexDataChartItem",
+  components: {
+    expressionFace,
+  },
   props: {
     dayNum: {
       type: Number,
@@ -77,7 +84,12 @@ export default {
     font-size: 20px;
     color: #ffffff;
   }
+
+  // 表情
   .chart-item-expression {
+    position: absolute;
+    bottom: 4px;
+    padding: 0 4px;
   }
 }
 </style>
