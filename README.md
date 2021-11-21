@@ -11,7 +11,3 @@ yarn install
 ```
 yarn run dev
 ```
-
-### show image
-
-![展示](https://github.com//youngzhaojia/mood/raw/main/mood.mov)
