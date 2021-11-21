@@ -11,3 +11,7 @@ yarn install
 ```
 yarn run dev
 ```
+
+### movie
+
+![展示](https://github.com/youngzhaojia/mood/mood.mov)
