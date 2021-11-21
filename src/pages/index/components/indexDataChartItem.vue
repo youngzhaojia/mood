@@ -9,9 +9,9 @@
       {{ moodData.value}}
     </view>
 
-    <!-- 表情 -->
+    <!-- 表情组件 -->
     <view class="chart-item-expression">
-      <expressionFace></expressionFace>
+      <component :is="getExpression()"></component>
     </view>
   </view>
 </template>
@@ -20,12 +20,16 @@
 import * as moodConfig from "@/constants/moodConfig";
 
 import expressionFace from "@/components/expressionFace";
+import expressionLaugh from "@/components/expressionLaugh";
+import expressionQuestion from "@/components/expressionQuestion";
 
 // 图心情指数柱状
 export default {
   name: "indexDataChartItem",
   components: {
     expressionFace,
+    expressionLaugh,
+    expressionQuestion,
   },
   props: {
     dayNum: {
@@ -57,7 +61,25 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    // 获取表情组件
+    getExpression() {
+      let expression = moodConfig.moodTypeExpression[this.moodData.type];
+      let expressionComponent;
+      switch (expression) {
+        case "face":
+          expressionComponent = expressionFace;
+          break;
+        case "laugh":
+          expressionComponent = expressionLaugh;
+          break;
+        default:
+          expressionComponent = expressionQuestion;
+          break;
+      }
+      return expressionComponent;
+    },
+  },
 };
 </script>
 

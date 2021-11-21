@@ -65,5 +65,6 @@ export {
   MOOD_TYPE_UNKNOWN,
   UNKNOWN_CHART_HEIGHT,
   moodTypeColorMap,
+  moodTypeExpression,
   moodWeekData,
 };
