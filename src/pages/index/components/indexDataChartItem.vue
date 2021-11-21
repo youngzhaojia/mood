@@ -19,9 +19,9 @@
 <script>
 import * as moodConfig from "@/constants/moodConfig";
 
-import expressionFace from "@/components/expressionFace";
-import expressionLaugh from "@/components/expressionLaugh";
-import expressionQuestion from "@/components/expressionQuestion";
+import expressionFace from "@/components/expression/expressionFace";
+import expressionLaugh from "@/components/expression/expressionLaugh";
+import expressionQuestion from "@/components/expression/expressionQuestion";
 
 // 图心情指数柱状
 export default {

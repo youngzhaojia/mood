@@ -1,5 +1,8 @@
 <template>
   <view class="index-data">
+    <!-- 柱状下的线 -->
+    <view class="index-data-line"></view>
+
     <!-- 柱状chart start -->
     <view class="index-data-chat">
       <indexDataChartItem v-for="(dataItem,index) in moodWeekData"
@@ -43,6 +46,17 @@ export default {
 
 <style scoped lang="scss">
 .index-data {
+  position: relative;
+  // 柱状下的线
+  .index-data-line {
+    position: absolute;
+    top: 144px;
+    width: 100%;
+    height: 2px;
+    background: #f2f2f2;
+    border-radius: 16px;
+  }
+
   .index-data-chat {
     display: flex;
     justify-content: space-between;
