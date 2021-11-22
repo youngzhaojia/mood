@@ -201,12 +201,10 @@ export default {
 
     // 失去激活
     &.active-remove-animation-common {
-      animation: commonRemoveActive 1s;
       background: #52c873;
     }
 
     &.active-remove-animation-great {
-      animation: greatRemoveActive 1s;
       background: #ff823c;
     }
 
@@ -264,25 +262,6 @@ export default {
   }
   100% {
     background: linear-gradient(180deg, #ffa14a 35.42%, #ffcc4a 100%);
-  }
-}
-
-// 去除激活
-@keyframes commonRemoveActive {
-  0% {
-    background: linear-gradient(180deg, #42f373 42.71%, #a1fd44 100%);
-  }
-  100% {
-    background: #52c873;
-  }
-}
-
-@keyframes greatRemoveActive {
-  0% {
-    background: linear-gradient(180deg, #ffa14a 35.42%, #ffcc4a 100%);
-  }
-  100% {
-    background: #ff823c;
   }
 }
 </style>
